@@ -1,28 +1,28 @@
-const Header = (headerName) => {
+const Header = (props) => {
   return (
-      <h1>{headerName.name}</h1>
+      <h1>{props.name}</h1>
   )
 }
 
-const Part = (partName) => {
+const Part = (props) => {
   return (
-    <p>{partName.course} {partName.points}</p>
+    <p>{props.course} {props.points}</p>
   )
 }
 
-const Content = (courseName) => {
+const Content = (props) => {
   return (
     <>
-    <Part course={courseName.course[0]} points={courseName.points[0]} />
-    <Part course={courseName.course[1]} points={courseName.points[1]} />
-    <Part course={courseName.course[2]} points={courseName.points[2]} />
+    <Part course={props.course[0]} points={props.points[0]} />
+    <Part course={props.course[1]} points={props.points[1]} />
+    <Part course={props.course[2]} points={props.points[2]} />
     </>
   )
 }
 
-const Total = (point) => {
+const Total = (props) => {
   return (
-    <p>Number of exercises = {point.points.reduce((partialSum, a) => partialSum + a, 0)} </p>
+    <p>Number of exercises = {props.points.reduce((partialSum, a) => partialSum + a, 0)} </p>
   )
 }
 
@@ -44,8 +44,8 @@ const App = () => {
   return (
     <div>
       <Header name={course}/>
-      <Content course={[part1,part2,part3]} points={[exercises1,exercises2,exercises3]} />
-      <Total points={[exercises1,exercises2,exercises3]} />
+      <Content course={[part1.name,part2.name,part3.name]} points={[part1.exercises,part2.exercises,part3.exercises]} />
+      <Total points={[part1.exercises,part2.exercises,part3.exercises]} />
     </div>
   )
 }
