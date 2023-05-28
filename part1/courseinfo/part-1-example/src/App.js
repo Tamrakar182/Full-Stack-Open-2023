@@ -1,3 +1,21 @@
+const Header = (headerName) => {
+  return (
+      <h1>{headerName.name}</h1>
+  )
+}
+
+const Content = (courseName) => {
+  return (
+    <p>{courseName.course} {courseName.points}</p>
+  )
+}
+
+const Total = (points) => {
+  return (
+    <p>Number of exercises = {points.points.reduce((partialSum, a) => partialSum + a, 0)} </p>
+  )
+}
+
 const App = () => {
   const course = 'Half Stack application development'
   const part1 = 'Fundamentals of React'
@@ -9,19 +27,14 @@ const App = () => {
 
   return (
     <div>
-      <h1>{course}</h1>
-      <p>
-        {part1} {exercises1}
-      </p>
-      <p>
-        {part2} {exercises2}
-      </p>
-      <p>
-        {part3} {exercises3}
-      </p>
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+      <Header name={course}/>
+      <Content course={part1} points={exercises1}/>
+      <Content course={part2} points={exercises2}/>
+      <Content course={part3} points={exercises3}/>
+      <Total points={[exercises1,exercises2,exercises3]} />
     </div>
   )
 }
+
 
 export default App
