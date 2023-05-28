@@ -42,12 +42,14 @@ const App = () => {
       exercises: 14
     }
   ]
+  const names = parts.map(part => part.name);
+  const exercises = parts.map(part => part.exercises);
 
   return (
     <div>
       <Header name={course}/>
-      <Content course={[part1.name,part2.name,part3.name]} points={[part1.exercises,part2.exercises,part3.exercises]} />
-      <Total points={[part1.exercises,part2.exercises,part3.exercises]} />
+      <Content course={names} points={exercises} />
+      <Total points={exercises} />
     </div>
   )
 }
