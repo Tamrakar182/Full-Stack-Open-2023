@@ -4,15 +4,25 @@ const Header = (headerName) => {
   )
 }
 
-const Content = (courseName) => {
+const Part = (partName) => {
   return (
-    <p>{courseName.course} {courseName.points}</p>
+    <p>{partName.course} {partName.points}</p>
   )
 }
 
-const Total = (points) => {
+const Content = (courseName) => {
   return (
-    <p>Number of exercises = {points.points.reduce((partialSum, a) => partialSum + a, 0)} </p>
+    <>
+    <Part course={courseName.course[0]} points={courseName.points[0]} />
+    <Part course={courseName.course[1]} points={courseName.points[1]} />
+    <Part course={courseName.course[2]} points={courseName.points[2]} />
+    </>
+  )
+}
+
+const Total = (point) => {
+  return (
+    <p>Number of exercises = {point.points.reduce((partialSum, a) => partialSum + a, 0)} </p>
   )
 }
 
@@ -28,9 +38,7 @@ const App = () => {
   return (
     <div>
       <Header name={course}/>
-      <Content course={part1} points={exercises1}/>
-      <Content course={part2} points={exercises2}/>
-      <Content course={part3} points={exercises3}/>
+      <Content course={[part1,part2,part3]} points={[exercises1,exercises2,exercises3]} />
       <Total points={[exercises1,exercises2,exercises3]} />
     </div>
   )
