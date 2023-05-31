@@ -4,19 +4,19 @@ const Heading = ({headingText}) => <h1>{headingText}</h1>
 
 const Button = ({clickAction, text}) => <button onClick={clickAction}>{text}</button>
 
-const Statistics = ({name,count}) => {
+const StatisticsLine = ({name, value}) => <p>{name} {value}</p>
+
+const Statistics = ({count}) => {
   if(count[0] || count[1] || count[2] > 0) {
     return (
       <>
-        <p>{name[0]} {count[0]}</p>
-        <p>{name[1]} {count[1]}</p>
-        <p>{name[2]} {count[2]}</p>
-        <p>{name[3]} {count[3]}</p>
-        <p>{name[4]} {count[4]}</p>
-        <p>{name[5]} {count[5]}</p>
+        <StatisticsLine name="good" value={count[0]} />
+        <StatisticsLine name="neutral" value={count[1]} />
+        <StatisticsLine name="bad" value={count[2]} />
+        <StatisticsLine name="all" value={count[3]} />
+        <StatisticsLine name="average" value={count[4]} />
+        <StatisticsLine name="positive" value={count[5]} />
       </>
-      
-
     )
   }
   return (
@@ -85,7 +85,7 @@ const App = () => {
       />
       
       <Heading headingText="statistics" />
-      <Statistics name={["good","neutral","bad","all","average","postive"]} count={[good, neutral, bad, total, average, positivePercent]} />
+      <Statistics count={[good, neutral, bad, total, average, positivePercent]} />
     </div>
   )
 }
