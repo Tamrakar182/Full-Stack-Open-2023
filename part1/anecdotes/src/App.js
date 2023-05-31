@@ -6,6 +6,8 @@ const Anecdote = ({anecdote}) => <p>{anecdote}</p>
 
 const Votes = ({numbers}) => <p>has {numbers} votes</p>
 
+const Heading = ({text}) => <h1>{text}</h1>
+
 const App = () => {
 
   const anecdotes = [
@@ -21,6 +23,7 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(new Uint16Array(anecdotes.length))
+  const [top, setTop] = useState(0)
 
   const getRandomSelection = () => {
     setSelected(getRandomNumber(0,anecdotes.length))
@@ -34,15 +37,25 @@ const App = () => {
     const newVotes = [...votes]
     newVotes[selected] += 1
     setVotes(newVotes)
+
+    const maximum = Math.max(...newVotes)
+    const newTop = newVotes.indexOf(maximum)
+    setTop(newTop)
   }
 
   
   return (
     <div>
+      <Heading text="Anecdotes of the Day" />
       <Anecdote anecdote={anecdotes[selected]} />
       <Votes numbers={votes[selected]} />
       <Button text="next anecdote" action={getRandomSelection} />
       <Button text="vote" action={voteCurrent} />
+
+      <Heading text="Anecdotes with the most votes" />
+      <Anecdote anecdote={anecdotes[top]} />
+      <Votes numbers={votes[top]} />
+
     </div>
   )
 }
