@@ -4,7 +4,25 @@ const Heading = ({headingText}) => <h1>{headingText}</h1>
 
 const Button = ({clickAction, text}) => <button onClick={clickAction}>{text}</button>
 
-const Statistics = ({name,count}) => <p>{name} {count}</p>
+const Statistics = ({name,count}) => {
+  if(count[0] || count[1] || count[2] > 0) {
+    return (
+      <>
+        <p>{name[0]} {count[0]}</p>
+        <p>{name[1]} {count[1]}</p>
+        <p>{name[2]} {count[2]}</p>
+        <p>{name[3]} {count[3]}</p>
+        <p>{name[4]} {count[4]}</p>
+        <p>{name[5]} {count[5]}</p>
+      </>
+      
+
+    )
+  }
+  return (
+    <p>No feedback given</p>
+  )
+}
 
 
 const App = () => {
@@ -67,12 +85,7 @@ const App = () => {
       />
       
       <Heading headingText="statistics" />
-      <Statistics name="good" count={good} />
-      <Statistics name="neutral" count={neutral} />
-      <Statistics name="bad" count={bad} />
-      <Statistics name="all" count={total} />
-      <Statistics name="average" count={average} />
-      <Statistics name="positive" count={positivePercent} />
+      <Statistics name={["good","neutral","bad","all","average","postive"]} count={[good, neutral, bad, total, average, positivePercent]} />
     </div>
   )
 }
