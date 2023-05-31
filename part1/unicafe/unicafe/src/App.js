@@ -4,19 +4,31 @@ const Heading = ({headingText}) => <h1>{headingText}</h1>
 
 const Button = ({clickAction, text}) => <button onClick={clickAction}>{text}</button>
 
-const StatisticsLine = ({name, value}) => <p>{name} {value}</p>
+const StatisticsLine = ({name, value}) => {
+  return(
+    <tr>
+      <td>{name}</td> 
+      <td>{value}</td>
+    </tr>
+  )
+}
 
 const Statistics = ({count}) => {
   if(count[0] || count[1] || count[2] > 0) {
     return (
-      <>
+      <table>
+        <tbody>
+          
         <StatisticsLine name="good" value={count[0]} />
         <StatisticsLine name="neutral" value={count[1]} />
         <StatisticsLine name="bad" value={count[2]} />
         <StatisticsLine name="all" value={count[3]} />
         <StatisticsLine name="average" value={count[4]} />
         <StatisticsLine name="positive" value={count[5]} />
-      </>
+        
+        </tbody>
+        
+      </table>
     )
   }
   return (
@@ -42,7 +54,7 @@ const App = () => {
     const updatedTotal = total+1
     setAverage((updatedGood-bad)/updatedTotal)
 
-    setPositivePercent((updatedGood/updatedTotal)*100)
+    setPositivePercent((updatedGood/updatedTotal)*100 + "%")
   }
 
   const handleNeutral = () => {
@@ -52,7 +64,7 @@ const App = () => {
     setTotal(good+bad+updatedNeutral)
 
     const updatedTotal = total+1
-    setPositivePercent((good/updatedTotal)*100)
+    setPositivePercent((good/updatedTotal)*100 + "%")
   }
 
   const handleBad = () => {
@@ -64,7 +76,7 @@ const App = () => {
     const updatedTotal = total+1
     setAverage((good-updatedBad)/updatedTotal)
 
-    setPositivePercent((good/updatedTotal)*100)
+    setPositivePercent((good/updatedTotal)*100 + "%")
   }
 
 
