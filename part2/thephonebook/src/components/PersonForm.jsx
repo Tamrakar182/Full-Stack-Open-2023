@@ -6,15 +6,12 @@ const PersonForm = ({ personList, setPeopleList }) => {
 
   const addName = (event) => {
     event.preventDefault();
-
     if (newName.trim() === "") {
-      // Handle empty name input
       return;
     }
     const existingPerson = personList.find(
       (person) => person.name.toLowerCase() === newName.toLowerCase()
     );
-
     if (existingPerson) {
       window.alert(`${newName} is already added to the phonebook.`);
       return;
