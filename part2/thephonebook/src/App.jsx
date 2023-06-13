@@ -10,8 +10,11 @@ const App = () => {
 
   useEffect(()=>{
     axios
-      .get(' http://localhost:3001/persons')
-      .then(res => setPeopleList(res))
+      .get('http://localhost:3001/persons')
+      .then(res => {
+        setPeopleList(res.data)
+  })
+    
   }, [])
 
   const setPeopleList = (PeopleToShow) => {
