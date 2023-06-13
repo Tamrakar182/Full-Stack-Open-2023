@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from "axios"
+import peopleService from './services/peoples'
 import Heading from './components/Heading'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
@@ -9,12 +9,9 @@ const App = () => {
   const [personList, setPersonList] = useState([])
 
   useEffect(()=>{
-    axios
-      .get('http://localhost:3001/persons')
-      .then(res => {
-        setPeopleList(res.data)
-  })
-    
+    peopleService
+      .getAll()
+      .then(initialPeople => setPeopleList(initialPeople))
   }, [])
 
   const setPeopleList = (PeopleToShow) => {
@@ -30,7 +27,7 @@ const App = () => {
       <PersonForm personList={personList} setPeopleList={setPeopleList} />
 
       <Heading name="Numbers" />
-      <Persons personList={personList} /> 
+      <Persons personList={personList} setPeopleList={setPeopleList} /> 
     </div>
   )
 }
