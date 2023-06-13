@@ -1,7 +1,9 @@
 import peopleService from '../services/peoples'
 
-const Persons = ({ personList, setPeopleList }) => {
-  const idList = personList.map(person => person.id)
+const Persons = ({ personList, setPeopleList, setMessage }) => {
+  const errorStyle = {
+    color: 'red'
+  }
 
   const deleteConfirm = (person) => {
     if (window.confirm(`Delete ${person.name}?`)) {
@@ -12,7 +14,15 @@ const Persons = ({ personList, setPeopleList }) => {
           const updatedPersonList = personList.filter(p => p.id !== person.id);
           setPeopleList(updatedPersonList);
         })
-      .catch(error => console.log(error));
+      .catch(error => {
+        setMessage(
+          ` "${person.name}' was already removed from server`
+        )
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+        setPeopleList(personList.filter(n => n.id !== person.id))
+      });
     }
   }
 
