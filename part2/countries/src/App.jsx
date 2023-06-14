@@ -31,9 +31,9 @@ const App = () => {
       <Title textData="Find Countries" />
       <form>
         <input type="text" placeholder="Search for a country..." value={searchText} onChange={handleSearchTextChange} />
-        <button type="submit">Search</button>
       </form>
-      <Countries countryList={countries}/>
+
+      <Countries countryList={countries} />
     
     </>
   )
