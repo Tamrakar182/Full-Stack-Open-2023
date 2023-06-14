@@ -27,7 +27,7 @@ const PersonForm = ({ personList, setPeopleList, setMessage }) => {
           .update(nameObject, id)
           .then((returnedPeople)=>{
             setPeopleList(personList.map(person => person.id !== id ? person : returnedPeople))
-            setMessage(`${newName} updated.`)
+            setMessage({ type: 'success', content: `Successfully modified "${returnedPeople.name}".` })
             setTimeout(() => {
               setMessage(null)
             }, 5000)
@@ -50,7 +50,7 @@ const PersonForm = ({ personList, setPeopleList, setMessage }) => {
 
     peopleService.create(nameObject).then((returnedPeople)=>{
       setPeopleList(personList.concat(nameObject));
-      setMessage(`${newName} added to phonebook.`)
+      setMessage({ type: 'success', content: `Successfully added "${returnedPeople.name}".` })
       setTimeout(() => {
         setMessage(null)
       }, 5000)

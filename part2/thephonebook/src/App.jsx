@@ -8,12 +8,12 @@ import Persons from './components/Persons'
 
 const App = () => {
   const [personList, setPersonList] = useState([])
-  const [errorMessage, setMessage] = useState('')
+  const [message, setMessage] = useState(null)
 
   useEffect(()=>{
     peopleService
       .getAll()
-      .then(initialPeople => setPeopleList(initialPeople))
+      .then(initialPeople => setPersonList(initialPeople))
   }, [])
 
   const setPeopleList = (PeopleToShow) => {
@@ -24,7 +24,7 @@ const App = () => {
     <div>
       <Heading name="Phonebook" />
 
-      <Notification message={errorMessage} />
+      <Notification message={message} />
 
       <Filter personList={personList} handleFilteredPersons={setPeopleList}/>
 

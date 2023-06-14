@@ -1,6 +1,6 @@
-const Title = ({text}) => {
+const Title = ({textData}) => {
     return(
-        <h1>{text}</h1>
+        <h1>{textData}</h1>
     )
 }
 

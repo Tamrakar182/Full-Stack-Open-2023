@@ -7,7 +7,7 @@ const getCountry = (name) => {
 }
 
 const getAll = () => {
-    const req = axios.get(`${API_URL}/all`)
+    const req = axios.get(`https://restcountries.com/v2/all`)
     return req.then(res => res.data)
 }
 

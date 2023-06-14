@@ -1,10 +1,7 @@
 import peopleService from '../services/peoples'
 
 const Persons = ({ personList, setPeopleList, setMessage }) => {
-  const errorStyle = {
-    color: 'red'
-  }
-
+ 
   const deleteConfirm = (person) => {
     if (window.confirm(`Delete ${person.name}?`)) {
       peopleService
@@ -15,9 +12,7 @@ const Persons = ({ personList, setPeopleList, setMessage }) => {
           setPeopleList(updatedPersonList);
         })
       .catch(error => {
-        setMessage(
-          ` "${person.name}' was already removed from server`
-        )
+        setMessage({ type: 'error', content: `"${person.name}" was already removed from the server.` })
         setTimeout(() => {
           setMessage(null)
         }, 5000)
