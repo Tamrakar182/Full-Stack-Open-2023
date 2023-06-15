@@ -1,47 +1,45 @@
-import countryService from "../services/country";
-import { useState, useEffect } from "react";
+import countryService from '../services/country';
+import { useState, useEffect } from 'react';
 
 const CountryDetails = ({ country }) => {
-  const [countryObj, setCountryObj] = useState(null);
-  useEffect(() => {
-    if (country) {
-      countryService.getCountry(country).then((singleCountry) => {
-        const countryObj = {
-          Name: singleCountry.name.official,
-          Capital: singleCountry.capital,
-          Area: singleCountry.area,
-          Languages: singleCountry.languages,
-          Flag: singleCountry.flags.png
-        };
-        setCountryObj(countryObj);
-      });
+    const [countryObj, setCountryObj] = useState(null);
+    useEffect(() => {
+        if (country) {
+            countryService.getCountry(country).then((singleCountry) => {
+                const countryObj = {
+                    Name: singleCountry.name.official,
+                    Capital: singleCountry.capital,
+                    Area: singleCountry.area,
+                    Languages: singleCountry.languages,
+                    Flag: singleCountry.flags.png,
+                };
+                setCountryObj(countryObj);
+            });
+        }
+    }, [country]);
+
+    if (!countryObj) {
+        return <p>Loading country details...</p>;
     }
-  }, [country]);
-  
-  if (!countryObj) {
-    return <p>Loading country details...</p>;
-  }
 
-  return (
-    <div>
-      <p>Capital: {countryObj.Capital}</p>
-      <p>Area: {countryObj.Area}</p>
+    return (
+        <div>
+            <p>Capital: {countryObj.Capital}</p>
+            <p>Area: {countryObj.Area}</p>
 
-      <h2>Languages: </h2>
-      <ul>
-        {Object.entries(countryObj.Languages).map(([code, language]) => (
-          <li key={code}>
-            {language}
-          </li>
-        ))}
-      </ul>
+            <h2>Languages: </h2>
+            <ul>
+                {Object.entries(countryObj.Languages).map(([code, language]) => (
+                    <li key={code}>{language}</li>
+                ))}
+            </ul>
 
-      <img src={countryObj.Flag} alt="Country Flag" />
-    </div>
-  );
+            <img src={countryObj.Flag} alt="Country Flag" />
+        </div>
+    );
 };
 
-export default CountryDetails
+export default CountryDetails;
 
 // Object Format is like this
 
@@ -83,4 +81,3 @@ export default CountryDetails
 //     "capitalInfo": {},
 //     "postalCode": {}
 //    }
-
