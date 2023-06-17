@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <div>
-      <Heading name="Phonebook" />
+      <Heading name="Phonebook App" />
 
       <Notification message={message} />
 
