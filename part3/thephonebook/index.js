@@ -1,8 +1,15 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 
-app.use(express.json())
 
+
+morgan.token('person', function getPerson(req) {
+  return JSON.stringify(req.body)
+})
+
+app.use(morgan(':method :url :response-time :person'))
+app.use(express.json())
 
 let persons = [
     { 
@@ -65,6 +72,8 @@ const generateId = () => {
     return maxId + 1
   }
 
+
+
 app.post('/api/persons', (req, res)=> {
     const body = req.body
     const names = persons.map(person => person.name)
@@ -97,6 +106,7 @@ app.post('/api/persons', (req, res)=> {
     persons = persons.concat(person)
     res.json(persons)
 })
+
 
 const PORT = 3001
 app.listen(PORT, ()=>{
