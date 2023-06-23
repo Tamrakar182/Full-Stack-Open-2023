@@ -11,7 +11,6 @@ const App = () => {
     useEffect(() => {
         const filteredCountries = countries.filter((name) => {
             const regx = new RegExp(searchText, 'i');
-
             return regx.test(name);
         });
 
