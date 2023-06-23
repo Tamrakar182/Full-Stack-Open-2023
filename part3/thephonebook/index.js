@@ -72,6 +72,7 @@ app.post("/api/persons", (req, res, next) => {
   Person.find({}).then((persons) => {
     const names = persons.map((person) => person.name);
 
+    // checks if person already exists in db
     if (names.includes(body.name)) {
       const person = {
         name: body.name,
@@ -83,26 +84,17 @@ app.post("/api/persons", (req, res, next) => {
         })
         .catch((error) => next(error));
     } 
-    if (body.name === undefined) {
-      return res.status(400).json({
-        error: "name missing",
-      });
-    } 
-    if (body.number === undefined) {
-      return res.status(400).json({
-        error: "number missing",
-      });
-    }
-
       const person = new Person({
         name: body.name,
         number: body.number,
       });
 
-      person.save().then((savedPerson) => {
+      person
+        .save()
+        .then((savedPerson) => {
         res.json(savedPerson);
-      });
-    
+        })
+        .catch((error) => next(error))
   });
 });
 
